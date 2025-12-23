@@ -25,13 +25,13 @@ def create_person_list(people: list) -> list:
     Create the objects in the first pass and in the second pass
     establish the "wife" / "husband" attributes, connecting them to each other.
     """
-    for p in people:
-        Person(p["name"], p["age"])
-    for p in people:
-        individual = Person.people[p["name"]]
-        for relation in p:
-            if relation in ["wife", "husband"] and p[relation] is not None:
-                partner_name = p.get(relation)
+    for ppl in people:
+        Person(ppl["name"], ppl["age"])
+    for ppl in people:
+        individual = Person.people[ppl["name"]]
+        for relation in ppl:
+            if relation in ["wife", "husband"] and ppl[relation] is not None:
+                partner_name = ppl.get(relation)
                 partner_instance = Person.people.get(partner_name)
                 setattr(individual, relation, partner_instance)
-    return [Person.people[p["name"]] for p in people]
+    return [Person.people[p["name"]] for ppl in people]
